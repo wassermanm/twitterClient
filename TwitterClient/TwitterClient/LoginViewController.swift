@@ -26,10 +26,21 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var userNameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
-    
     // MARK: - Action Methods
     @IBAction func loginAction(sender: AnyObject) {
-        performSegueWithIdentifier("tweetsSegue", sender: nil)
+        guard let userName = userNameField.text, let password = passwordField.text else {
+            //popup alert here
+            return
+        }
+        //
+        if let authKey = DataManager.sharedInstance.login(userName, password: password) {
+            let defaults = NSUserDefaults.standardUserDefaults()
+            defaults.setBool(false, forKey: "firstLogin")
+            performSegueWithIdentifier("tweetsSegue", sender: nil)
+        } else {
+            //pop up alert here
+        }
+        
     }
 
 }

@@ -22,6 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if defaults.stringForKey("firstLogin") == nil {
+            loadUser()
+            loadTweets()
+        }
         return true
     }
 
@@ -111,6 +116,71 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
+    // MARK: - Data Helper Methods
+    
+    private func loadTweets() {
+        let filePath = NSBundle.mainBundle().pathForResource("Tweets",ofType:"json")
+        guard (filePath != nil) else {
+            print("can't find Tweets.json file")
+            return
+        }
+        
+        if let data = NSData(contentsOfFile: filePath!) {
+            do {
+                let json = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
+                for item in json as! [[String:String]] {
+                    let tweet = NSEntityDescription.insertNewObjectForEntityForName("Tweets", inManagedObjectContext: managedObjectContext) as! Tweets
+                    guard let author = item["author"], let dateOfTweet = item["dateOfTweet"], let tweetText = item["tweet"] else {
+                        print("data error in Tweets.json file")
+                        return
+                    }
+                    
+                    let adate = NSDate()
+                    print(adate)
+                    
+                    tweet.author      = author
+                    tweet.dateOfTweet = stringToDate(dateOfTweet)
+                    tweet.tweet       = tweetText
+                }
+                self.saveContext()
+            } catch {
+                print("error serializing user JSON from Tweets.json: \(error)")
+            }
+        }
+    }
+    
+    private func loadUser() {
+        let filePath = NSBundle.mainBundle().pathForResource("User",ofType:"json")
+        guard (filePath != nil) else {
+            print("can't find User.json file")
+            return
+        }
+        
+        if let data = NSData(contentsOfFile: filePath!) {
+            do {
+                let json = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
+                for item in json as! [[String:String]] {
+                    let user = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: managedObjectContext) as! User
+                    guard let userName = item["userName"], let password = item["password"] else {
+                        print("data error in User.json file")
+                        return
+                    }
+                    user.userName = userName
+                    user.password = password
+                }
+                self.saveContext()
+            } catch {
+                print("error serializing user JSON from User.json: \(error)")
+            }
+        }
+    }
 
+    func stringToDate(dateStr:String) -> NSDate? {
+        let dateFormatter        = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.timeZone   = NSTimeZone(name: "UTC")
+        return dateFormatter.dateFromString(dateStr)
+    }
 }
 
