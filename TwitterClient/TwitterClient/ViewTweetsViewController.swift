@@ -10,10 +10,11 @@ import UIKit
 
 class ViewTweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    
+
     @IBOutlet weak var tweetsTableView: UITableView!
     var tweetsToShow = Array<Tweets>()
     
+    //MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Tweets"
@@ -21,8 +22,10 @@ class ViewTweetsViewController: UIViewController, UITableViewDelegate, UITableVi
             return
         }
         tweetsToShow = tweets
+        
     }
     
+    //MARK: - UITableViewDataSource Methods
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tweetsToShow.count
     }
@@ -32,6 +35,15 @@ class ViewTweetsViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.render(tweetsToShow[indexPath.row])
         
         return cell
+    }
+    
+    //MARK: - IBAction Methods
+    @IBAction func logoutAction(sender: AnyObject) {
+        
+    }
+    
+    @IBAction func addTweetButton(sender: UIBarButtonItem) {
+        
     }
 }
 
