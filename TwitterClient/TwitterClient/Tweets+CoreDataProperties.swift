@@ -18,5 +18,6 @@ extension Tweets {
     @NSManaged var dateOfTweet: NSDate?
     @NSManaged var author: String?
     @NSManaged var userName: String?
+    @NSManaged var newTweet: NSNumber?
 
 }

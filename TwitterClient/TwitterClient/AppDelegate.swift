@@ -26,6 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if defaults.stringForKey("firstLogin") == nil {
             loadUser()
             loadTweets()
+            let defaults = NSUserDefaults.standardUserDefaults()
+            defaults.setBool(false, forKey: "firstLogin")
         }
         return true
     }
@@ -135,10 +137,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         print("data error in Tweets.json file")
                         return
                     }
-                    
-                    let adate = NSDate()
-                    print(adate)
-                    
                     tweet.author      = author
                     tweet.dateOfTweet = stringToDate(dateOfTweet)
                     tweet.tweet       = tweetText

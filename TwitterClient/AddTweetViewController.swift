@@ -31,6 +31,8 @@ class AddTweetViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func tweetAction(sender: AnyObject) {
+        DataManager.sharedInstance.addTweet(newTweetTextView.text)
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     //MARK: - UITextViewDelegate Methods

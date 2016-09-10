@@ -28,6 +28,8 @@ public class DataManager {
             if let results = objects {
                 if results.count > 0 {
                     authKey = "ASDFADSFASDFASDFAS" //this should come from backend - a token for subsequent calls
+                    let defaults = NSUserDefaults.standardUserDefaults()
+                    defaults.setValue(userName, forKey: "currentUser")
                 } else {
                     authKey = nil
                 }
@@ -55,5 +57,59 @@ public class DataManager {
             print("error retreiving user: \(error)")
         }
         return tweets
+    }
+    
+    func addTweet(tweetText:String) {
+        let tweet = NSEntityDescription.insertNewObjectForEntityForName("Tweets", inManagedObjectContext: managedObjectContext) as! Tweets
+        
+        let defaults      = NSUserDefaults.standardUserDefaults()
+        tweet.author      = defaults.stringForKey("currentUser")
+        tweet.dateOfTweet = NSDate()
+        tweet.tweet       = tweetText
+        tweet.userName    = defaults.stringForKey("currentUser")
+        tweet.newTweet    = true
+        do {
+            try  self.managedObjectContext.save()
+        } catch {
+            print("error trying to save tweet: \(error)")
+        }
+    }
+    
+    func getNewTweets() -> Array<Tweets> {
+        var tweets         = Array<Tweets>()
+        let defaults       = NSUserDefaults.standardUserDefaults()
+        guard let userName = defaults.stringForKey("currentUser") else {
+            print("no userName - getNewTweets()")
+            return tweets
+        }
+        
+        let fetchRequest       = NSFetchRequest(entityName: "Tweets")
+        let tweetsPredicate    = NSPredicate(format: "userName = %@ AND newTweet=%@", userName, true)
+        fetchRequest.predicate = tweetsPredicate
+        
+        do {
+            let objects = try managedObjectContext.executeFetchRequest(fetchRequest) as? [Tweets]
+            if let results = objects {
+                for tweet in results {
+                    tweets.append(tweet)
+                }
+            }
+        } catch {
+            print("error retreiving user: \(error)")
+        }
+        makeTweetsAsOld(tweets)
+        return tweets
+    }
+    
+    private func makeTweetsAsOld(tweets:Array<Tweets>) {
+        for tweet in tweets {
+            tweet.newTweet = false
+        }
+        do {
+            try  self.managedObjectContext.save()
+        } catch {
+            print("error trying to mark tweets as old: \(error)")
+        }
+
     }
 }

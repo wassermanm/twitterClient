@@ -124,7 +124,6 @@
                                                     <rect key="frame" x="80" y="38" width="280" height="112"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="112" id="bn8-rZ-dnQ"/>
-                                                        <constraint firstAttribute="width" constant="280" id="qD3-lA-cht"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

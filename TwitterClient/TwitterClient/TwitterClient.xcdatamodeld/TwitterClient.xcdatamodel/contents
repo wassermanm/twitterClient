@@ -3,6 +3,7 @@
     <entity name="Tweets" representedClassName=".Tweets" syncable="YES">
         <attribute name="author" attributeType="String" syncable="YES"/>
         <attribute name="dateOfTweet" attributeType="Date" syncable="YES"/>
+        <attribute name="newTweet" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="tweet" attributeType="String" syncable="YES"/>
         <attribute name="userName" attributeType="String" syncable="YES"/>
     </entity>
@@ -12,6 +13,6 @@
     </entity>
     <elements>
         <element name="User" positionX="-7130" positionY="-2827" width="128" height="73"/>
-        <element name="Tweets" positionX="-6939" positionY="-2826" width="128" height="103"/>
+        <element name="Tweets" positionX="-6939" positionY="-2826" width="128" height="118"/>
     </elements>
 </model>

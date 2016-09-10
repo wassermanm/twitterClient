@@ -33,9 +33,7 @@ class LoginViewController: UIViewController {
             return
         }
         //
-        if let authKey = DataManager.sharedInstance.login(userName, password: password) {
-            let defaults = NSUserDefaults.standardUserDefaults()
-            defaults.setBool(false, forKey: "firstLogin")
+        if DataManager.sharedInstance.login(userName, password: password) != nil {
             performSegueWithIdentifier("tweetsSegue", sender: nil)
         } else {
             //pop up alert here
