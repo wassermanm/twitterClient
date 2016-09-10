@@ -10,6 +10,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -21,10 +22,14 @@ class LoginViewController: UIViewController {
     }
 
     
+    // MARK: - Outlets
     @IBOutlet weak var userNameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
+    
+    // MARK: - Action Methods
     @IBAction func loginAction(sender: AnyObject) {
+        performSegueWithIdentifier("tweetsSegue", sender: nil)
     }
 
 }
