@@ -13,17 +13,62 @@ class TwitterClientTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        DataManager.sharedInstance.deleteUser()
+        DataManager.sharedInstance.deleteTweets()
+        DataManager.sharedInstance.logOut()
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testLogin() {
+        do {
+            let authKey = try DataManager.sharedInstance.login("tester", password: "password")
+            XCTAssert(authKey != "")
+        } catch {
+            print("failure")
+        }
+        
+        do {
+            let authKey = try DataManager.sharedInstance.login("test", password: "password")
+            XCTAssert(authKey == "")
+        } catch {
+            print("failure")
+        }
+    }
+    
+    func testGetTweetsForUser() {
+        do {
+            //this should only be run if data is loaded at first run of app
+            try DataManager.sharedInstance.login("tester", password: "password")
+            let tweets = try DataManager.sharedInstance.getTweetsForUser()
+            XCTAssert(tweets.count == 17)
+        } catch {
+            print("failure")
+        }
+    }
+    
+    func testAddTweet() {
+        do {
+            try DataManager.sharedInstance.login("tester", password: "password")
+            try DataManager.sharedInstance.addTweet("this is a new tweet")
+            let tweets = try DataManager.sharedInstance.getTweetsForUser()
+            XCTAssert(tweets.count == 18)
+        } catch {
+            print("failure")
+        }
+    }
+    
+    func testGetNewTweets() {
+        do {
+            try DataManager.sharedInstance.login("tester", password: "password")
+            try DataManager.sharedInstance.addTweet("this is a new tweet")
+            let tweets = try DataManager.sharedInstance.getNewTweets()
+            XCTAssert(tweets.count == 1)
+        } catch {
+            print("failure")
+        }
     }
     
     func testPerformanceExample() {

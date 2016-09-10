@@ -22,7 +22,7 @@ class ViewTweetsViewController: UIViewController, UITableViewDelegate, UITableVi
         
         var tweets = Array<Tweets>()
         do {
-            tweets = try DataManager.sharedInstance.getTweetsForUser("tester")
+            tweets = try DataManager.sharedInstance.getTweetsForUser()
         } catch {
             let alertController = UIAlertController(title: "Account Issue", message: "Problem accessing account. Please try again later", preferredStyle: .Alert)
             let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
@@ -82,8 +82,7 @@ class ViewTweetsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     //MARK: - IBAction Methods
     @IBAction func logoutAction(sender: AnyObject) {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.removeObjectForKey("currentUser")
+        DataManager.sharedInstance.logOut()
         dismissViewControllerAnimated(true, completion: nil)
         
     }
