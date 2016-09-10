@@ -4,6 +4,7 @@
         <attribute name="author" attributeType="String" syncable="YES"/>
         <attribute name="dateOfTweet" attributeType="Date" syncable="YES"/>
         <attribute name="tweet" attributeType="String" syncable="YES"/>
+        <attribute name="userName" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName=".User" syncable="YES">
         <attribute name="password" attributeType="String" syncable="YES"/>
@@ -11,6 +12,6 @@
     </entity>
     <elements>
         <element name="User" positionX="-7130" positionY="-2827" width="128" height="73"/>
-        <element name="Tweets" positionX="-6939" positionY="-2826" width="128" height="88"/>
+        <element name="Tweets" positionX="-6939" positionY="-2826" width="128" height="103"/>
     </elements>
 </model>

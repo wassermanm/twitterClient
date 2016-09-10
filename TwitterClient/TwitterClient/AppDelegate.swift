@@ -131,7 +131,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let json = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
                 for item in json as! [[String:String]] {
                     let tweet = NSEntityDescription.insertNewObjectForEntityForName("Tweets", inManagedObjectContext: managedObjectContext) as! Tweets
-                    guard let author = item["author"], let dateOfTweet = item["dateOfTweet"], let tweetText = item["tweet"] else {
+                    guard let author = item["author"], let dateOfTweet = item["dateOfTweet"], let tweetText = item["tweet"], let userName = item["userName"] else {
                         print("data error in Tweets.json file")
                         return
                     }
@@ -142,6 +142,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     tweet.author      = author
                     tweet.dateOfTweet = stringToDate(dateOfTweet)
                     tweet.tweet       = tweetText
+                    tweet.userName    = userName
                 }
                 self.saveContext()
             } catch {

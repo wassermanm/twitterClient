@@ -12,17 +12,26 @@ class ViewTweetsViewController: UIViewController, UITableViewDelegate, UITableVi
 
     
     @IBOutlet weak var tweetsTableView: UITableView!
+    var tweetsToShow = Array<Tweets>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Tweets"
+        guard let tweets = DataManager.sharedInstance.getTweetsForUser("tester") else {
+            return
+        }
+        tweetsToShow = tweets
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return tweetsToShow.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCellWithIdentifier("tweetCell") as! TweetCell
+        cell.render(tweetsToShow[indexPath.row])
+        
+        return cell
     }
 }
+

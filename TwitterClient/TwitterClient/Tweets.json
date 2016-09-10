@@ -2,86 +2,103 @@
   {
   "author":"tester",
   "tweet":"This is the first tweet",
-  "dateOfTweet":"2016-07-15 10:37:29"
+  "dateOfTweet":"2016-07-15 10:37:29",
+  "userName":"tester"
   },
   {
   "author":"tester",
   "tweet":"Twitter is great!",
-  "dateOfTweet":"2016-07-15 11:22:19"
+  "dateOfTweet":"2016-07-15 11:22:19",
+  "userName":"tester"
   },
   {
   "author":"some guy",
   "tweet":"tweet",
-  "dateOfTweet":"2016-07-16 09:12:15"
+  "dateOfTweet":"2016-07-16 09:12:15",
+  "userName":"tester"
   },
   {
   "author":"tester",
   "tweet":"I like pizza",
-  "dateOfTweet":"2016-07-17 09:33:03"
+  "dateOfTweet":"2016-07-17 09:33:03",
+  "userName":"tester"
   },
   {
   "author":"someone else",
   "tweet":"Pizza is great!",
-  "dateOfTweet":"2016-07-17 18:37:40"
+  "dateOfTweet":"2016-07-17 18:37:40",
+  "userName":"tester"
   },
   {
   "author":"yet another person",
   "tweet":"I am tweeting",
-  "dateOfTweet":"2016-07-19 12:24:13"
+  "dateOfTweet":"2016-07-19 12:24:13",
+  "userName":"tester"
   },
   {
   "author":"tester",
   "tweet":"Art is the proper task of life.",
-  "dateOfTweet":"2016-07-20 11:22:19"
+  "dateOfTweet":"2016-07-20 11:22:19",
+  "userName":"tester"
   },
   {
   "author":"tester",
   "tweet":"There are no facts, only interpretations.",
-  "dateOfTweet":"2016-07-25 07:05:43"
+  "dateOfTweet":"2016-07-25 07:05:43",
+  "userName":"tester"
   },
   {
   "author":"someone else",
   "tweet":"If a lion could talk we could not understand him",
-  "dateOfTweet":"2016-07-25 08:58:19"
+  "dateOfTweet":"2016-07-25 08:58:19",
+  "userName":"tester"
   },
   {
   "author":"tester",
   "tweet":"Nothing is so difficult as not deceiving oneself.",
-  "dateOfTweet":"2016-07-29 06:06:05"
+  "dateOfTweet":"2016-07-29 06:06:05",
+  "userName":"tester"
   },
   {
   "author":"tester",
   "tweet":"I like TV.",
-  "dateOfTweet":"2016-07-30 20:04:24"
+  "dateOfTweet":"2016-07-30 20:04:24",
+  "userName":"tester"
   },
   {
   "author":"tester",
   "tweet":"Troubles my sight: a waste of desert sand",
-  "dateOfTweet":"2016-08-02 03:54:26"
+  "dateOfTweet":"2016-08-02 03:54:26",
+  "userName":"tester"
   },
   {
   "author":"tester",
   "tweet":"Why turn askance",
-  "dateOfTweet":"2016-08-12 11:09:02"
+  "dateOfTweet":"2016-08-12 11:09:02",
+  "userName":"tester"
   },
   {
   "author":"tester",
   "tweet":"The best lack all conviction and the worst are filled with a passionate intensity",
-  "dateOfTweet":"2016-08-12 13:08:43"
+  "dateOfTweet":"2016-08-12 13:08:43",
+  "userName":"tester"
   },
   {
   "author":"someone else",
   "tweet":"Of pebbles which the waves draw back, and fling",
-  "dateOfTweet":"2016-08-12 16:22:19"
+  "dateOfTweet":"2016-08-12 16:22:19",
+  "userName":"tester"
   },
   {
   "author":"tester",
   "tweet":"So various, so beautiful, so new",
-  "dateOfTweet":"2016-08-15 02:03:19"
+  "dateOfTweet":"2016-08-15 02:03:19",
+  "userName":"tester"
   },
   {
   "author":"tester",
   "tweet":"He was found by the Bureau of Statistics to be",
-  "dateOfTweet":"2016-08-17 10:33:21"
+  "dateOfTweet":"2016-08-17 10:33:21",
+  "userName":"tester"
   },
   ]
