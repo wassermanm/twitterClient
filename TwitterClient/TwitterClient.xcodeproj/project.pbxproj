@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		954533881D82D5040097F34B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954533871D82D5040097F34B /* AppDelegate.swift */; };
-		9545338A1D82D5040097F34B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954533891D82D5040097F34B /* ViewController.swift */; };
+		9545338A1D82D5040097F34B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954533891D82D5040097F34B /* LoginViewController.swift */; };
 		9545338D1D82D5040097F34B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9545338B1D82D5040097F34B /* Main.storyboard */; };
 		954533901D82D5040097F34B /* TwitterClient.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9545338E1D82D5040097F34B /* TwitterClient.xcdatamodeld */; };
 		954533921D82D5040097F34B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 954533911D82D5040097F34B /* Assets.xcassets */; };
@@ -29,7 +29,7 @@
 /* Begin PBXFileReference section */
 		954533841D82D5040097F34B /* TwitterClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		954533871D82D5040097F34B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		954533891D82D5040097F34B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		954533891D82D5040097F34B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9545338C1D82D5040097F34B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9545338F1D82D5040097F34B /* TwitterClient.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TwitterClient.xcdatamodel; sourceTree = "<group>"; };
 		954533911D82D5040097F34B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -80,7 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				954533871D82D5040097F34B /* AppDelegate.swift */,
-				954533891D82D5040097F34B /* ViewController.swift */,
+				954533891D82D5040097F34B /* LoginViewController.swift */,
 				9545338B1D82D5040097F34B /* Main.storyboard */,
 				954533911D82D5040097F34B /* Assets.xcassets */,
 				954533931D82D5040097F34B /* LaunchScreen.storyboard */,
@@ -201,7 +201,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				954533901D82D5040097F34B /* TwitterClient.xcdatamodeld in Sources */,
-				9545338A1D82D5040097F34B /* ViewController.swift in Sources */,
+				9545338A1D82D5040097F34B /* LoginViewController.swift in Sources */,
 				954533881D82D5040097F34B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -392,6 +392,7 @@
 				954533A61D82D5040097F34B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		954533A71D82D5040097F34B /* Build configuration list for PBXNativeTarget "TwitterClientTests" */ = {
 			isa = XCConfigurationList;
@@ -400,6 +401,7 @@
 				954533A91D82D5040097F34B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
