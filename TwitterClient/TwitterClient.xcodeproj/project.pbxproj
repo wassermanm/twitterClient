@@ -25,6 +25,8 @@
 		95ADE3741D84809E000EA2A2 /* AddTweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ADE3731D84809E000EA2A2 /* AddTweetViewController.swift */; };
 		95ADE3761D848F48000EA2A2 /* Tweets+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ADE3751D848F48000EA2A2 /* Tweets+CoreDataProperties.swift */; };
 		95ADE3781D84A09D000EA2A2 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ADE3771D84A09D000EA2A2 /* DateExtensions.swift */; };
+		95ADE37C1D84A40E000EA2A2 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ADE37B1D84A40E000EA2A2 /* Reachability.swift */; };
+		95ADE37E1D84A769000EA2A2 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ADE37D1D84A769000EA2A2 /* Enums.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,8 @@
 		95ADE3731D84809E000EA2A2 /* AddTweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddTweetViewController.swift; path = ../AddTweetViewController.swift; sourceTree = "<group>"; };
 		95ADE3751D848F48000EA2A2 /* Tweets+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tweets+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		95ADE3771D84A09D000EA2A2 /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
+		95ADE37B1D84A40E000EA2A2 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		95ADE37D1D84A769000EA2A2 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +113,8 @@
 				95ADE35B1D8428D8000EA2A2 /* ViewTweetsViewController.swift */,
 				95ADE36D1D845EA7000EA2A2 /* TweetCell.swift */,
 				95ADE3771D84A09D000EA2A2 /* DateExtensions.swift */,
+				95ADE37B1D84A40E000EA2A2 /* Reachability.swift */,
+				95ADE37D1D84A769000EA2A2 /* Enums.swift */,
 				9545338B1D82D5040097F34B /* Main.storyboard */,
 				954533911D82D5040097F34B /* Assets.xcassets */,
 				954533931D82D5040097F34B /* LaunchScreen.storyboard */,
@@ -255,6 +261,7 @@
 				9545338A1D82D5040097F34B /* LoginViewController.swift in Sources */,
 				95ADE3621D8432F8000EA2A2 /* User.swift in Sources */,
 				95ADE3641D8432F8000EA2A2 /* Tweets.swift in Sources */,
+				95ADE37E1D84A769000EA2A2 /* Enums.swift in Sources */,
 				954533881D82D5040097F34B /* AppDelegate.swift in Sources */,
 				95ADE3781D84A09D000EA2A2 /* DateExtensions.swift in Sources */,
 				95ADE3611D8432F8000EA2A2 /* User+CoreDataProperties.swift in Sources */,
@@ -263,6 +270,7 @@
 				95ADE3741D84809E000EA2A2 /* AddTweetViewController.swift in Sources */,
 				95ADE3671D84333A000EA2A2 /* DataManager.swift in Sources */,
 				95ADE35C1D8428D8000EA2A2 /* ViewTweetsViewController.swift in Sources */,
+				95ADE37C1D84A40E000EA2A2 /* Reachability.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

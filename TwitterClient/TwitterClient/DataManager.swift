@@ -19,8 +19,8 @@ public class DataManager {
     
     //in this method I am looking up the user and returning an (fake) authorization key as a token to indicated
     //that the user has been found and thus successfully logged in
-    func login(userName:String, password:String) -> String? {
-        var authKey:String?
+    func login(userName:String, password:String) throws -> String {
+        var authKey = ""
         let fetchRequest       = NSFetchRequest(entityName: "User")
         let loginPredicate     = NSPredicate(format: "userName = %@ AND password = %@", userName, password)
         fetchRequest.predicate = loginPredicate
@@ -28,25 +28,25 @@ public class DataManager {
             let objects = try managedObjectContext.executeFetchRequest(fetchRequest) as? [User]
             if let results = objects {
                 if results.count > 0 {
-                    authKey = "ASDFADSFASDFASDFAS" //this should come from backend - a token for subsequent calls
+                    authKey = "ASDFADSFASDFASDFAS" //a token to indicate successful login - ideally would come from backend
                     setUpUserDefaults(userName)
                 } else {
-                    authKey = nil
+                    authKey = ""
                 }
             }
         } catch {
             print("error retreiving user: \(error)")
+            throw DataError.Error
         }
         return authKey
     }
     
     //gets all tweets for a user - called only the first time the user views tweets
-    func getTweetsForUser(userName:String) -> Array<Tweets>? {
+    func getTweetsForUser(userName:String) throws -> Array<Tweets> {
         var tweets             = Array<Tweets>()
         let fetchRequest       = NSFetchRequest(entityName: "Tweets")
         let tweetsPredicate    = NSPredicate(format: "userName = %@", userName)
         fetchRequest.predicate = tweetsPredicate
-        
         do {
             let objects = try managedObjectContext.executeFetchRequest(fetchRequest) as? [Tweets]
             if let results = objects {
@@ -56,11 +56,12 @@ public class DataManager {
             }
         } catch {
             print("error retreiving user: \(error)")
+            throw DataError.Error
         }
         return tweets
     }
     
-    func addTweet(tweetText:String) {
+    func addTweet(tweetText:String) throws {
         let tweet = NSEntityDescription.insertNewObjectForEntityForName("Tweets", inManagedObjectContext: managedObjectContext) as! Tweets
         
         let defaults      = NSUserDefaults.standardUserDefaults()
@@ -73,11 +74,12 @@ public class DataManager {
             try  self.managedObjectContext.save()
         } catch {
             print("error trying to save tweet: \(error)")
+            throw DataError.Error
         }
     }
     
     //retrieves "new" tweets - called only when the user is logged in and views tweets after the first time
-    func getNewTweets() -> Array<Tweets> {
+    func getNewTweets() throws -> Array<Tweets> {
         var tweets         = Array<Tweets>()
         let defaults       = NSUserDefaults.standardUserDefaults()
         guard let userName = defaults.stringForKey("currentUser") else {
@@ -98,6 +100,7 @@ public class DataManager {
             }
         } catch {
             print("error retreiving user: \(error)")
+            throw DataError.Error
         }
         makeTweetsAsOld(tweets)
         return tweets
@@ -111,6 +114,7 @@ public class DataManager {
         do {
             try  self.managedObjectContext.save()
         } catch {
+            //fail silently - there is no need to alert the user to this error
             print("error trying to mark tweets as old: \(error)")
         }
     }

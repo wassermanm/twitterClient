@@ -19,7 +19,11 @@ class ViewTweetsViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
         self.title = "Tweets"
-        guard let tweets = DataManager.sharedInstance.getTweetsForUser("tester") else {
+        
+        var tweets = Array<Tweets>()
+        do {
+            tweets = try DataManager.sharedInstance.getTweetsForUser("tester")
+        } catch {
             let alertController = UIAlertController(title: "Account Issue", message: "Problem accessing account. Please try again later", preferredStyle: .Alert)
             let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alertController.addAction(defaultAction)
@@ -41,7 +45,17 @@ class ViewTweetsViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         if !isFirstLoad {
-            let newTweets = DataManager.sharedInstance.getNewTweets()
+            var newTweets = Array<Tweets>()
+            do {
+                newTweets = try DataManager.sharedInstance.getNewTweets()
+            } catch {
+                let alertController = UIAlertController(title: "Network Error", message: "A network error has occurred. Please check your network settings and try again.", preferredStyle: .Alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alertController.addAction(defaultAction)
+                presentViewController(alertController, animated: true, completion: nil)
+            }
+            
+            //only do this work if we have new tweets
             if newTweets.count > 0 {
                 let tempTweets = tweetsToShow + newTweets
                 tweetsToShow = tempTweets.sort{($0.dateOfTweet)!.compare($1.dateOfTweet!) == .OrderedDescending}
@@ -52,7 +66,6 @@ class ViewTweetsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     //MARK: - UITableViewDataSource and UITableViewDelegate Methods
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(tweetsToShow.count)
         return tweetsToShow.count
     }
     

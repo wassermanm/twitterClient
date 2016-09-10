@@ -31,7 +31,16 @@ class AddTweetViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func tweetAction(sender: AnyObject) {
-        DataManager.sharedInstance.addTweet(newTweetTextView.text)
+        
+        do {
+            try DataManager.sharedInstance.addTweet(newTweetTextView.text)
+        } catch {
+            let alertController = UIAlertController(title: "Tweet Error", message: "An error occurred. Your tweet was not saved. Please try again later.", preferredStyle: .Alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(defaultAction)
+            presentViewController(alertController, animated: true, completion: nil)
+            dismissViewControllerAnimated(true, completion: nil)
+        }
         dismissViewControllerAnimated(true, completion: nil)
     }
     

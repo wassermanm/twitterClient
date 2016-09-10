@@ -40,13 +40,33 @@ class LoginViewController: UIViewController {
             //that forced unwrapping is bad form
             return
         }
-        if DataManager.sharedInstance.login(userName, password: password) != nil {
-            performSegueWithIdentifier("tweetsSegue", sender: nil)
-        } else {
+        
+        if !Reachability.isConnectedToNetwork() {
+            let alertController = UIAlertController(title: "No Network", message: "It appears that you are not connected to a network. Please check your network settings and try again.", preferredStyle: .Alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(defaultAction)
+            presentViewController(alertController, animated: true, completion: nil)
+        }
+        
+        var authKey = ""
+        
+        do {
+            try authKey = DataManager.sharedInstance.login(userName, password: password)
+        } catch {
+            let alertController = UIAlertController(title: "Network Error", message: "A network error has occurred. Please check your network settings and try again.", preferredStyle: .Alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(defaultAction)
+            presentViewController(alertController, animated: true, completion: nil)
+            return
+        }
+        
+        if authKey == "" {
             let alertController = UIAlertController(title: "Invalid Login", message: "You have entered an invalid user name or password. Please try again.", preferredStyle: .Alert)
             let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alertController.addAction(defaultAction)
             presentViewController(alertController, animated: true, completion: nil)
+        } else {
+            performSegueWithIdentifier("tweetsSegue", sender: nil)
         }
         
     }
