@@ -55,11 +55,11 @@ class ViewTweetsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     //MARK: - IBAction Methods
     @IBAction func logoutAction(sender: AnyObject) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.removeObjectForKey("currentUser")
+        dismissViewControllerAnimated(true, completion: nil)
         
     }
-    
-    @IBAction func addTweetButton(sender: UIBarButtonItem) {
-        
-    }
+
 }
 

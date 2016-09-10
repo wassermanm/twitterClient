@@ -183,7 +183,6 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="dNv-lX-BUx">
                             <connections>
-                                <action selector="addTweetButton:" destination="zzP-wu-d3n" id="hRO-dp-C3L"/>
                                 <segue destination="a8y-qS-NqT" kind="presentation" id="b0Y-9A-Nmh"/>
                             </connections>
                         </barButtonItem>

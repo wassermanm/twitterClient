@@ -15,6 +15,12 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        userNameField.text = ""
+        passwordField.text = ""
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
