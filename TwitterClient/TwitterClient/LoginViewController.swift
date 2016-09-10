@@ -35,14 +35,18 @@ class LoginViewController: UIViewController {
     // MARK: - Action Methods
     @IBAction func loginAction(sender: AnyObject) {
         guard let userName = userNameField.text, let password = passwordField.text else {
-            //popup alert here
+            //since I'm setting the username and password to empty strings in viewWillAppear 
+            //these values will never be nil. This guard statement is here because I believe
+            //that forced unwrapping is bad form
             return
         }
-        //
         if DataManager.sharedInstance.login(userName, password: password) != nil {
             performSegueWithIdentifier("tweetsSegue", sender: nil)
         } else {
-            //pop up alert here
+            let alertController = UIAlertController(title: "Invalid Login", message: "You have entered an invalid user name or password. Please try again.", preferredStyle: .Alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(defaultAction)
+            presentViewController(alertController, animated: true, completion: nil)
         }
         
     }

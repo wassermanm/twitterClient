@@ -17,7 +17,8 @@ public class DataManager {
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     internal static let sharedInstance = DataManager()
     
-    //in this method I am looking up the user and returning an (fake) authorization key
+    //in this method I am looking up the user and returning an (fake) authorization key as a token to indicated
+    //that the user has been found and thus successfully logged in
     func login(userName:String, password:String) -> String? {
         var authKey:String?
         let fetchRequest       = NSFetchRequest(entityName: "User")
@@ -28,8 +29,7 @@ public class DataManager {
             if let results = objects {
                 if results.count > 0 {
                     authKey = "ASDFADSFASDFASDFAS" //this should come from backend - a token for subsequent calls
-                    let defaults = NSUserDefaults.standardUserDefaults()
-                    defaults.setValue(userName, forKey: "currentUser")
+                    setUpUserDefaults(userName)
                 } else {
                     authKey = nil
                 }
@@ -40,6 +40,7 @@ public class DataManager {
         return authKey
     }
     
+    //gets all tweets for a user - called only the first time the user views tweets
     func getTweetsForUser(userName:String) -> Array<Tweets>? {
         var tweets             = Array<Tweets>()
         let fetchRequest       = NSFetchRequest(entityName: "Tweets")
@@ -75,6 +76,7 @@ public class DataManager {
         }
     }
     
+    //retrieves "new" tweets - called only when the user is logged in and views tweets after the first time
     func getNewTweets() -> Array<Tweets> {
         var tweets         = Array<Tweets>()
         let defaults       = NSUserDefaults.standardUserDefaults()
@@ -101,6 +103,7 @@ public class DataManager {
         return tweets
     }
     
+    //updates "new" tweets making them old tweets as soon as they are retrieved for the user
     private func makeTweetsAsOld(tweets:Array<Tweets>) {
         for tweet in tweets {
             tweet.newTweet = false
@@ -110,6 +113,14 @@ public class DataManager {
         } catch {
             print("error trying to mark tweets as old: \(error)")
         }
-
+    }
+    
+    private func setUpUserDefaults(userName:String) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setValue(userName, forKey: "currentUser")
+        if defaults.stringForKey("firstLogin") == nil {
+            let defaults = NSUserDefaults.standardUserDefaults()
+            defaults.setBool(false, forKey: "firstLogin")
+        }
     }
 }

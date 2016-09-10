@@ -14,7 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
@@ -26,9 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if defaults.stringForKey("firstLogin") == nil {
             loadUser()
             loadTweets()
-            let defaults = NSUserDefaults.standardUserDefaults()
-            defaults.setBool(false, forKey: "firstLogin")
         }
+        
         return true
     }
 
@@ -138,7 +136,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         return
                     }
                     tweet.author      = author
-                    tweet.dateOfTweet = stringToDate(dateOfTweet)
+                    tweet.dateOfTweet = NSDate.stringToDate(dateOfTweet)
                     tweet.tweet       = tweetText
                     tweet.userName    = userName
                 }
@@ -174,12 +172,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
-    func stringToDate(dateStr:String) -> NSDate? {
-        let dateFormatter        = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        dateFormatter.timeZone   = NSTimeZone(name: "UTC")
-        return dateFormatter.dateFromString(dateStr)
-    }
+    
 }
 

@@ -25,11 +25,3 @@ class TweetCell: UITableViewCell {
     }
 }
 
-extension NSDate {
-    class func fromDateToString(dateToConvert:NSDate) -> String? {
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let dateString = formatter.stringFromDate(dateToConvert)
-        return dateString
-    }
-}

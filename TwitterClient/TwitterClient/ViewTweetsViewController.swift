@@ -17,10 +17,23 @@ class ViewTweetsViewController: UIViewController, UITableViewDelegate, UITableVi
     //MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.automaticallyAdjustsScrollViewInsets = false
         self.title = "Tweets"
         guard let tweets = DataManager.sharedInstance.getTweetsForUser("tester") else {
+            let alertController = UIAlertController(title: "Account Issue", message: "Problem accessing account. Please try again later", preferredStyle: .Alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(defaultAction)
+            presentViewController(alertController, animated: true, completion: nil)
             return
         }
+        
+        if tweets.count < 1 {
+            let alertController = UIAlertController(title: "No Tweets", message: "No Tweets found!", preferredStyle: .Alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(defaultAction)
+            presentViewController(alertController, animated: true, completion: nil)
+        }
+        
         tweetsToShow = tweets.sort{($0.dateOfTweet)!.compare($1.dateOfTweet!) == .OrderedDescending}
         isFirstLoad = false
     }
@@ -37,8 +50,9 @@ class ViewTweetsViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
     
-    //MARK: - UITableViewDataSource Methods
+    //MARK: - UITableViewDataSource and UITableViewDelegate Methods
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(tweetsToShow.count)
         return tweetsToShow.count
     }
     
@@ -49,8 +63,8 @@ class ViewTweetsViewController: UIViewController, UITableViewDelegate, UITableVi
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
     }
     
     //MARK: - IBAction Methods

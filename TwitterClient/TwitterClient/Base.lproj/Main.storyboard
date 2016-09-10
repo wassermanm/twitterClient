@@ -283,6 +283,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kZN-OQ-ZD6" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="KwX-vj-8Py">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
