@@ -58,4 +58,7 @@ should an error in the DataManager be encountered.
 The governing principal I tried to adhere to when writing this app, as I do in all the code I write, is to implement 
 the simplest thing that will work. I also took the notions of object responsibility and encapsulation into consideration. 
 
+If this were a real networked app I would have taken the asynchronous behaviour of network calls 
+into consideration and all that it entails, (UI "spinners" for example). 
+Given the nature of the app that I did build I didn't think that this was necessary.
 
