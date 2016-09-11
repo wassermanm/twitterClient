@@ -1,6 +1,11 @@
 # twitterClient
 
 This is a simple app that emulates a Twitter front end.
+It was written as an iPhone app. The username and password is
+Username: tester
+Password: password
+
+
 Core Data is used in lieu of a actual remote backend although the notion of 
 network calls is maintained through some of the messages presented to the user 
 as a result of error conditions and in some of the values returned from the "backend".
