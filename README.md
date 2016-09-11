@@ -5,6 +5,7 @@ It was written as an iPhone app. The username and password is
 Username: tester
 Password: password
 
+The deployment target is iOS 9.3
 
 Core Data is used in lieu of a actual remote backend although the notion of 
 network calls is maintained through some of the messages presented to the user 
