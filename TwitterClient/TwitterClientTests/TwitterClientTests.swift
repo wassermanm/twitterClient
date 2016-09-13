@@ -16,58 +16,54 @@ class TwitterClientTests: XCTestCase {
     }
     
     override func tearDown() {
-        DataManager.sharedInstance.deleteUser()
-        DataManager.sharedInstance.deleteTweets()
-        DataManager.sharedInstance.logOut()
+        DataManagerAsyc.sharedInstance.logOut()
         super.tearDown()
     }
     
     func testLogin() {
-        do {
-            let authKey = try DataManager.sharedInstance.login("tester", password: "password")
-            XCTAssert(authKey != "")
-        } catch {
-            print("failure")
+        let asyncExpectation = expectationWithDescription("login")
+        DataManagerAsyc.sharedInstance.login("tester", password: "password") { (success, message) in
+            if success {
+                asyncExpectation.fulfill()
+            }
         }
         
-        do {
-            let authKey = try DataManager.sharedInstance.login("test", password: "password")
-            XCTAssert(authKey == "")
-        } catch {
-            print("failure")
+        self.waitForExpectationsWithTimeout(5) { error in
+            XCTAssertNil(error)
         }
     }
     
     func testGetTweetsForUser() {
-        do {
-            //this should only be run if data is loaded at first run of app
-            try DataManager.sharedInstance.login("tester", password: "password")
-            let tweets = try DataManager.sharedInstance.getTweetsForUser()
-            XCTAssert(tweets.count == 17)
-        } catch {
-            print("failure")
+        let asyncExpectation = expectationWithDescription("getTweetsForUser")
+        DataManagerAsyc.sharedInstance.getTweetsForUser() { (success, message) in
+            if success {
+                if DataManagerAsyc.sharedInstance.tweets.count == 2 {
+                    asyncExpectation.fulfill()
+                }
+            }
+        }
+        
+        self.waitForExpectationsWithTimeout(5) { error in
+            XCTAssertNil(error)
         }
     }
     
     func testAddTweet() {
-        do {
-            try DataManager.sharedInstance.login("tester", password: "password")
-            try DataManager.sharedInstance.addTweet("this is a new tweet")
-            let tweets = try DataManager.sharedInstance.getTweetsForUser()
-            XCTAssert(tweets.count == 18)
-        } catch {
-            print("failure")
+        let asyncExpectation = expectationWithDescription("login")
+        DataManagerAsyc.sharedInstance.login("tester", password: "password") { (success, message) in
+            if success {
+                DataManagerAsyc.sharedInstance.addTweet("someTweet", completion: { (success, message) in
+                    if success {
+                        if DataManagerAsyc.sharedInstance.newTweets.count == 1 {
+                            asyncExpectation.fulfill()
+                        }
+                    }
+                })
+            }
         }
-    }
-    
-    func testGetNewTweets() {
-        do {
-            try DataManager.sharedInstance.login("tester", password: "password")
-            try DataManager.sharedInstance.addTweet("this is a new tweet")
-            let tweets = try DataManager.sharedInstance.getNewTweets()
-            XCTAssert(tweets.count == 1)
-        } catch {
-            print("failure")
+        
+        self.waitForExpectationsWithTimeout(5) { error in
+            XCTAssertNil(error)
         }
     }
     

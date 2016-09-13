@@ -10,12 +10,13 @@ import UIKit
 
 class AddTweetViewController: UIViewController, UITextViewDelegate {
 
+    //MARK: - IBOutlets
     @IBOutlet weak var newTweetTextView: UITextView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     //MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.newTweetTextView.layer.borderWidth = 2.0
         self.newTweetTextView.layer.borderColor = UIColor.grayColor().CGColor
     }
@@ -31,17 +32,27 @@ class AddTweetViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func tweetAction(sender: AnyObject) {
-        
-        do {
-            try DataManager.sharedInstance.addTweet(newTweetTextView.text)
-        } catch {
-            let alertController = UIAlertController(title: "Tweet Error", message: "An error occurred. Your tweet was not saved. Please try again later.", preferredStyle: .Alert)
-            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        if Reachability.isConnectedToNetwork() {
+            self.activityIndicator.startAnimating()
+            DataManagerAsyc.sharedInstance.addTweet(newTweetTextView.text, completion: { [weak self] (success, error) in
+                if success {
+                    self?.activityIndicator.stopAnimating()
+                    self?.dismissViewControllerAnimated(true, completion: nil)
+                } else {
+                    let alertController = UIAlertController(title: "Tweet Error", message: "An error occurred. Your tweet was not saved. Please try again later.", preferredStyle: .Alert)
+                    let defaultAction = UIAlertAction(title: kAlertOKButtonTitle, style: .Default, handler: nil)
+                    alertController.addAction(defaultAction)
+                    self?.presentViewController(alertController, animated: true, completion: nil)
+                    self?.activityIndicator.stopAnimating()
+                    self?.dismissViewControllerAnimated(true, completion: nil)
+                }
+            })
+        } else {
+            let alertController = UIAlertController(title: kNetworkErrorTitle, message: kNetworkErrorMessage, preferredStyle: .Alert)
+            let defaultAction = UIAlertAction(title: kAlertOKButtonTitle, style: .Default, handler: nil)
             alertController.addAction(defaultAction)
             presentViewController(alertController, animated: true, completion: nil)
-            dismissViewControllerAnimated(true, completion: nil)
         }
-        dismissViewControllerAnimated(true, completion: nil)
     }
     
     //MARK: - UITextViewDelegate Methods

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -21,6 +21,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="guR-Qh-dGF">
                                 <rect key="frame" x="190" y="100" width="220" height="340"/>
                                 <subviews>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="cWk-qj-Vya">
+                                        <rect key="frame" x="100" y="300" width="20" height="20"/>
+                                    </activityIndicatorView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TwitterLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Z8f-lX-o3Z">
                                         <rect key="frame" x="50" y="8" width="120" height="120"/>
                                         <constraints>
@@ -63,6 +66,8 @@
                                     <constraint firstItem="EfN-ng-leW" firstAttribute="centerX" secondItem="guR-Qh-dGF" secondAttribute="centerX" id="BKD-RF-cae"/>
                                     <constraint firstAttribute="height" constant="340" id="CXD-X6-P5b"/>
                                     <constraint firstItem="rlV-le-ptu" firstAttribute="centerX" secondItem="guR-Qh-dGF" secondAttribute="centerX" id="CmS-IC-R7f"/>
+                                    <constraint firstAttribute="bottom" secondItem="cWk-qj-Vya" secondAttribute="bottom" constant="20" id="KJd-7X-kWc"/>
+                                    <constraint firstItem="cWk-qj-Vya" firstAttribute="centerX" secondItem="guR-Qh-dGF" secondAttribute="centerX" id="NBb-OD-PbV"/>
                                     <constraint firstItem="n57-Lm-e8b" firstAttribute="centerX" secondItem="guR-Qh-dGF" secondAttribute="centerX" id="Uq1-Mr-4ND"/>
                                     <constraint firstItem="Z8f-lX-o3Z" firstAttribute="centerX" secondItem="guR-Qh-dGF" secondAttribute="centerX" id="YPd-c2-p3A"/>
                                     <constraint firstItem="n57-Lm-e8b" firstAttribute="top" secondItem="Z8f-lX-o3Z" secondAttribute="bottom" constant="25" id="g1h-QM-T4I"/>
@@ -81,6 +86,7 @@
                     <navigationItem key="navigationItem" id="ZRV-YQ-EZk"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="cWk-qj-Vya" id="I2N-3P-mWf"/>
                         <outlet property="passwordField" destination="EfN-ng-leW" id="BT4-3s-WCA"/>
                         <outlet property="userNameField" destination="n57-Lm-e8b" id="Age-ws-jcl"/>
                         <segue destination="kZN-OQ-ZD6" kind="show" identifier="tweetsSegue" id="cMq-WO-Fua"/>
@@ -110,7 +116,7 @@
                                         <rect key="frame" x="0.0" y="92" width="374" height="165"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="44S-F3-XJt" id="Tre-Es-6rq">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="164.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="164"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="th" translatesAutoresizingMaskIntoConstraints="NO" id="KiV-bX-kcs">
@@ -254,6 +260,13 @@
                                     <action selector="tweetAction:" destination="a8y-qS-NqT" eventType="touchUpInside" id="nm1-ib-v18"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="9mi-mt-rnx">
+                                <rect key="frame" x="192" y="162" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="eHG-pR-8x7"/>
+                                    <constraint firstAttribute="height" constant="30" id="uLu-Ya-gSH"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -261,16 +274,19 @@
                             <constraint firstItem="y7k-ap-coj" firstAttribute="centerX" secondItem="Jrw-6p-2F3" secondAttribute="centerX" id="93V-Ah-Dx8"/>
                             <constraint firstAttribute="trailingMargin" secondItem="NEq-lv-3cm" secondAttribute="trailing" constant="12" id="Bh4-IC-8wS"/>
                             <constraint firstItem="y7k-ap-coj" firstAttribute="top" secondItem="rwy-oW-yvW" secondAttribute="bottom" constant="12" id="Hv7-Cj-ufF"/>
+                            <constraint firstItem="9mi-mt-rnx" firstAttribute="centerX" secondItem="Jrw-6p-2F3" secondAttribute="centerX" id="IQj-Nh-LEz"/>
                             <constraint firstItem="56r-Yy-trq" firstAttribute="top" secondItem="a1P-eV-UlE" secondAttribute="bottom" constant="48" id="cAs-A6-uE6"/>
                             <constraint firstItem="NEq-lv-3cm" firstAttribute="top" secondItem="rwy-oW-yvW" secondAttribute="bottom" constant="132" id="deo-a5-f0h"/>
                             <constraint firstItem="dja-fz-OiA" firstAttribute="top" secondItem="y7k-ap-coj" secondAttribute="bottom" constant="14" id="ghR-ot-D9K"/>
                             <constraint firstItem="a1P-eV-UlE" firstAttribute="top" secondItem="NEq-lv-3cm" secondAttribute="bottom" constant="30" id="hMG-eN-VXz"/>
                             <constraint firstItem="a1P-eV-UlE" firstAttribute="leading" secondItem="Jrw-6p-2F3" secondAttribute="leadingMargin" constant="8" id="jga-x6-MB4"/>
                             <constraint firstItem="a1P-eV-UlE" firstAttribute="trailing" secondItem="Jrw-6p-2F3" secondAttribute="trailingMargin" constant="8" id="nlF-ou-0je"/>
+                            <constraint firstItem="9mi-mt-rnx" firstAttribute="top" secondItem="dja-fz-OiA" secondAttribute="bottom" constant="29" id="nlR-Ml-cZF"/>
                             <constraint firstItem="dja-fz-OiA" firstAttribute="centerX" secondItem="Jrw-6p-2F3" secondAttribute="centerX" id="rvH-i6-AQV"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="9mi-mt-rnx" id="n94-su-e6A"/>
                         <outlet property="newTweetTextView" destination="a1P-eV-UlE" id="Woh-PF-bbA"/>
                     </connections>
                 </viewController>

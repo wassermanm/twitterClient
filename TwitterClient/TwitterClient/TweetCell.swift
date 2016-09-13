@@ -14,7 +14,7 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     
-    func render(tweetData:Tweets) {
+    func render(tweetData:Tweet) {
         tweetContentLabel.text = tweetData.tweet
         userNameLabel.text     = tweetData.author
         guard let dateOfTweet  = tweetData.dateOfTweet else {
