@@ -21,20 +21,20 @@ class TwitterClientTests: XCTestCase {
     }
     
     func testLogin() {
-        let asyncExpectation = expectationWithDescription("login")
+        let asyncExpectation = expectation(description: "login")
         DataManagerAsyc.sharedInstance.login("tester", password: "password") { (success, message) in
             if success {
                 asyncExpectation.fulfill()
             }
         }
         
-        self.waitForExpectationsWithTimeout(5) { error in
+        self.waitForExpectations(timeout: 5) { error in
             XCTAssertNil(error)
         }
     }
     
     func testGetTweetsForUser() {
-        let asyncExpectation = expectationWithDescription("getTweetsForUser")
+        let asyncExpectation = expectation(description: "getTweetsForUser")
         DataManagerAsyc.sharedInstance.getTweetsForUser() { (success, message) in
             if success {
                 if DataManagerAsyc.sharedInstance.tweets.count == 2 {
@@ -43,13 +43,13 @@ class TwitterClientTests: XCTestCase {
             }
         }
         
-        self.waitForExpectationsWithTimeout(5) { error in
+        self.waitForExpectations(timeout: 5) { error in
             XCTAssertNil(error)
         }
     }
     
     func testAddTweet() {
-        let asyncExpectation = expectationWithDescription("login")
+        let asyncExpectation = expectation(description: "login")
         DataManagerAsyc.sharedInstance.login("tester", password: "password") { (success, message) in
             if success {
                 DataManagerAsyc.sharedInstance.addTweet("someTweet", completion: { (success, message) in
@@ -62,7 +62,7 @@ class TwitterClientTests: XCTestCase {
             }
         }
         
-        self.waitForExpectationsWithTimeout(5) { error in
+        self.waitForExpectations(timeout: 5) { error in
             XCTAssertNil(error)
         }
     }

@@ -8,18 +8,18 @@
 
 import Foundation
 
-extension NSDate {
-    class func fromDateToString(dateToConvert:NSDate) -> String? {
-        let formatter = NSDateFormatter()
+extension Date {
+    static func fromDateToString(_ dateToConvert:Date) -> String? {
+        let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let dateString = formatter.stringFromDate(dateToConvert)
+        let dateString = formatter.string(from: dateToConvert)
         return dateString
     }
     
-    class func stringToDate(dateStr:String) -> NSDate? {
-        let dateFormatter        = NSDateFormatter()
+    static func stringToDate(_ dateStr:String) -> Date? {
+        let dateFormatter        = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        dateFormatter.timeZone   = NSTimeZone(name: "UTC")
-        return dateFormatter.dateFromString(dateStr)
+        dateFormatter.timeZone   = TimeZone(identifier: "UTC")
+        return dateFormatter.date(from: dateStr)
     }
 }

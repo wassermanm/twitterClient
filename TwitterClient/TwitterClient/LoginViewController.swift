@@ -16,7 +16,7 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         userNameField.text = ""
         passwordField.text = ""
@@ -34,7 +34,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     // MARK: - Action Methods
-    @IBAction func loginAction(sender: AnyObject) {
+    @IBAction func loginAction(_ sender: AnyObject) {
         guard let userName = userNameField.text, let password = passwordField.text else {
             //since I'm setting the username and password to empty strings in viewWillAppear 
             //these values will never be nil. This guard statement is here because I believe
@@ -42,30 +42,30 @@ class LoginViewController: UIViewController {
             return
         }
         
-        if Reachability.isConnectedToNetwork() {
+        if Reachability.isNetworkReachable {
             activityIndicator.startAnimating()
             DataManagerAsyc.sharedInstance.login(userName, password: password, completion: { [weak self] (success, message) in
                 if success {
                     //get the tweets for the user
                     DataManagerAsyc.sharedInstance.getTweetsForUser({ [weak self] (success, message) in
                         self?.activityIndicator.stopAnimating()
-                        self?.performSegueWithIdentifier("tweetsSegue", sender: self)
+                        self?.performSegue(withIdentifier: "tweetsSegue", sender: self)
                         })
                     
                 } else {
                     self?.activityIndicator.stopAnimating()
-                    let alertController = UIAlertController(title: "Login Failure", message: "Login has failed. Please try again.", preferredStyle: .Alert)
-                    let defaultAction = UIAlertAction(title: kAlertOKButtonTitle, style: .Default, handler: nil)
+                    let alertController = UIAlertController(title: "Login Failure", message: "Login has failed. Please try again.", preferredStyle: .alert)
+                    let defaultAction = UIAlertAction(title: kAlertOKButtonTitle, style: .default, handler: nil)
                     alertController.addAction(defaultAction)
-                    self?.presentViewController(alertController, animated: true, completion: nil)
+                    self?.present(alertController, animated: true, completion: nil)
                     return
                 }
                 })
         } else {
-            let alertController = UIAlertController(title: kNetworkErrorTitle, message: kNetworkErrorMessage, preferredStyle: .Alert)
-            let defaultAction = UIAlertAction(title: kAlertOKButtonTitle, style: .Default, handler: nil)
+            let alertController = UIAlertController(title: kNetworkErrorTitle, message: kNetworkErrorMessage, preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: kAlertOKButtonTitle, style: .default, handler: nil)
             alertController.addAction(defaultAction)
-            presentViewController(alertController, animated: true, completion: nil)
+            present(alertController, animated: true, completion: nil)
         }
         
         

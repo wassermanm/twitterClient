@@ -18,7 +18,7 @@ class AddTweetViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.newTweetTextView.layer.borderWidth = 2.0
-        self.newTweetTextView.layer.borderColor = UIColor.grayColor().CGColor
+        self.newTweetTextView.layer.borderColor = UIColor.gray.cgColor
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,42 +27,42 @@ class AddTweetViewController: UIViewController, UITextViewDelegate {
     }
     
     //MARK: - IBAction Methods
-    @IBAction func dismissNewTweetAction(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func dismissNewTweetAction(_ sender: AnyObject) {
+        dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func tweetAction(sender: AnyObject) {
-        if Reachability.isConnectedToNetwork() {
+    @IBAction func tweetAction(_ sender: AnyObject) {
+        if Reachability.isNetworkReachable {
             self.activityIndicator.startAnimating()
             DataManagerAsyc.sharedInstance.addTweet(newTweetTextView.text, completion: { [weak self] (success, error) in
                 if success {
                     self?.activityIndicator.stopAnimating()
-                    self?.dismissViewControllerAnimated(true, completion: nil)
+                    self?.dismiss(animated: true, completion: nil)
                 } else {
-                    let alertController = UIAlertController(title: "Tweet Error", message: "An error occurred. Your tweet was not saved. Please try again later.", preferredStyle: .Alert)
-                    let defaultAction = UIAlertAction(title: kAlertOKButtonTitle, style: .Default, handler: nil)
+                    let alertController = UIAlertController(title: "Tweet Error", message: "An error occurred. Your tweet was not saved. Please try again later.", preferredStyle: .alert)
+                    let defaultAction = UIAlertAction(title: kAlertOKButtonTitle, style: .default, handler: nil)
                     alertController.addAction(defaultAction)
-                    self?.presentViewController(alertController, animated: true, completion: nil)
+                    self?.present(alertController, animated: true, completion: nil)
                     self?.activityIndicator.stopAnimating()
-                    self?.dismissViewControllerAnimated(true, completion: nil)
+                    self?.dismiss(animated: true, completion: nil)
                 }
             })
         } else {
-            let alertController = UIAlertController(title: kNetworkErrorTitle, message: kNetworkErrorMessage, preferredStyle: .Alert)
-            let defaultAction = UIAlertAction(title: kAlertOKButtonTitle, style: .Default, handler: nil)
+            let alertController = UIAlertController(title: kNetworkErrorTitle, message: kNetworkErrorMessage, preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: kAlertOKButtonTitle, style: .default, handler: nil)
             alertController.addAction(defaultAction)
-            presentViewController(alertController, animated: true, completion: nil)
+            present(alertController, animated: true, completion: nil)
         }
     }
     
     //MARK: - UITextViewDelegate Methods
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if !(textView.text.characters.count + (text.characters.count - range.length) <= 140) {
             //input for tweet exceeds 140 characters - inform user
-            let alertController = UIAlertController(title: "Limit Exceeded", message: "Your tweet exceeds 140 characters", preferredStyle: .Alert)
-            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            let alertController = UIAlertController(title: "Limit Exceeded", message: "Your tweet exceeds 140 characters", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(defaultAction)
-            presentViewController(alertController, animated: true, completion: nil)
+            present(alertController, animated: true, completion: nil)
             return false
         } else {
             return true

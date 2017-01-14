@@ -19,73 +19,73 @@ class ViewTweetsViewController: UIViewController, UITableViewDelegate, UITableVi
         self.automaticallyAdjustsScrollViewInsets = false
         self.title = "Tweets"
         var tweets = Array<Tweet>()
-        if Reachability.isConnectedToNetwork() {
+        if Reachability.isNetworkReachable {
             tweets = DataManagerAsyc.sharedInstance.tweets
         } else {
-            let alertController = UIAlertController(title: kNetworkErrorTitle, message: kNetworkErrorMessage, preferredStyle: .Alert)
-            let defaultAction = UIAlertAction(title: kAlertOKButtonTitle, style: .Default, handler: nil)
+            let alertController = UIAlertController(title: kNetworkErrorTitle, message: kNetworkErrorMessage, preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: kAlertOKButtonTitle, style: .default, handler: nil)
             alertController.addAction(defaultAction)
-            presentViewController(alertController, animated: true, completion: nil)
+            present(alertController, animated: true, completion: nil)
         }
         
         if tweets.count < 1 {
-            let alertController = UIAlertController(title: "No Tweets", message: "No Tweets found!", preferredStyle: .Alert)
-            let defaultAction = UIAlertAction(title: kAlertOKButtonTitle, style: .Default, handler: nil)
+            let alertController = UIAlertController(title: "No Tweets", message: "No Tweets found!", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: kAlertOKButtonTitle, style: .default, handler: nil)
             alertController.addAction(defaultAction)
-            presentViewController(alertController, animated: true, completion: nil)
+            present(alertController, animated: true, completion: nil)
         }
         
-        tweetsToShow = tweets.sort{($0.dateOfTweet)!.compare($1.dateOfTweet!) == .OrderedDescending}
+        tweetsToShow = tweets.sorted{($0.dateOfTweet)!.compare($1.dateOfTweet! as Date) == .orderedDescending}
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if Reachability.isConnectedToNetwork() {
+        if Reachability.isNetworkReachable {
             DataManagerAsyc.sharedInstance.getNewTweets({ [weak self] (success, message) in
                 if success {
                     if DataManagerAsyc.sharedInstance.newTweets.count > 0 {
-                        self?.tweetsToShow.appendContentsOf(DataManagerAsyc.sharedInstance.newTweets)
+                        self?.tweetsToShow.append(contentsOf: DataManagerAsyc.sharedInstance.newTweets)
                         if let tempTweets = self?.tweetsToShow {
-                            self?.tweetsToShow = tempTweets.sort{($0.dateOfTweet)!.compare($1.dateOfTweet!) == .OrderedDescending}
+                            self?.tweetsToShow = tempTweets.sorted{($0.dateOfTweet)!.compare($1.dateOfTweet!) == .orderedDescending}
                             self?.tweetsTableView.reloadData()
                         }
                     }
                 } else {
-                    let alertController = UIAlertController(title: kNetworkErrorTitle, message: kNetworkErrorMessage, preferredStyle: .Alert)
-                    let defaultAction = UIAlertAction(title: kAlertOKButtonTitle, style: .Default, handler: nil)
+                    let alertController = UIAlertController(title: kNetworkErrorTitle, message: kNetworkErrorMessage, preferredStyle: .alert)
+                    let defaultAction = UIAlertAction(title: kAlertOKButtonTitle, style: .default, handler: nil)
                     alertController.addAction(defaultAction)
-                    self?.presentViewController(alertController, animated: true, completion: nil)
+                    self?.present(alertController, animated: true, completion: nil)
                 }
                 
             })
         } else {
-            let alertController = UIAlertController(title: kNetworkErrorTitle, message: kNetworkErrorMessage, preferredStyle: .Alert)
-            let defaultAction = UIAlertAction(title: kAlertOKButtonTitle, style: .Default, handler: nil)
+            let alertController = UIAlertController(title: kNetworkErrorTitle, message: kNetworkErrorMessage, preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: kAlertOKButtonTitle, style: .default, handler: nil)
             alertController.addAction(defaultAction)
-            presentViewController(alertController, animated: true, completion: nil)
+            present(alertController, animated: true, completion: nil)
         }
     }
     
     //MARK: - UITableViewDataSource and UITableViewDelegate Methods
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tweetsToShow.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("tweetCell") as! TweetCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "tweetCell") as! TweetCell
         cell.render(tweetsToShow[indexPath.row])
-        cell.selectionStyle = .None
+        cell.selectionStyle = .none
         return cell
     }
     
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
     }
     
     //MARK: - IBAction Methods
-    @IBAction func logoutAction(sender: AnyObject) {
+    @IBAction func logoutAction(_ sender: AnyObject) {
         DataManagerAsyc.sharedInstance.logOut()
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
         
     }
 

@@ -14,14 +14,14 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     
-    func render(tweetData:Tweet) {
+    func render(_ tweetData:Tweet) {
         tweetContentLabel.text = tweetData.tweet
         userNameLabel.text     = tweetData.author
         guard let dateOfTweet  = tweetData.dateOfTweet else {
             timeLabel.text = ""
             return
         }
-        timeLabel.text = NSDate.fromDateToString(dateOfTweet)
+        timeLabel.text = Date.fromDateToString(dateOfTweet)
     }
 }
 

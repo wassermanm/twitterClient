@@ -11,7 +11,7 @@ import Foundation
 class Tweet {
     
     var tweet: String?
-    var dateOfTweet: NSDate?
+    var dateOfTweet: Date?
     var author: String?
     var userName: String?
     var newTweet: NSNumber?
